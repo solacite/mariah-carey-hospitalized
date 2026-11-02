@@ -1,3 +1,42 @@
 [gd_scene format=3 uid="uid://dv52mlexfh8f5"]
 
-[node name="Main" type="Node3D" unique_id=659614201]
+[ext_resource type="Script" uid="uid://bladcibjjqhtc" path="res://character_body_3d.gd" id="1_ig7tw"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7dm0k"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_smhyf"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4recf"]
+
+[sub_resource type="Sky" id="Sky_xvnu6"]
+sky_material = SubResource("ProceduralSkyMaterial_4recf")
+
+[sub_resource type="Environment" id="Environment_smhyf"]
+background_mode = 2
+sky = SubResource("Sky_xvnu6")
+
+[node name="main" type="Node3D" unique_id=659614201]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=2107113173]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.73034096, 0.05340743, -0.8635516)
+use_collision = true
+size = Vector3(6.7752686, 0.27301025, 9.641602)
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1758897329]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3086736, 0)
+script = ExtResource("1_ig7tw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=56541623]
+shape = SubResource("CapsuleShape3D_7dm0k")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D" unique_id=1308778230]
+mesh = SubResource("CapsuleMesh_smhyf")
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D" unique_id=505829204]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.80651045, -0.23699701)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=570357432]
+environment = SubResource("Environment_smhyf")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1398718969]
+transform = Transform3D(1, 0, 0, 0, 0.9061236, 0.42301303, 0, -0.42301303, 0.9061236, 0, 4.6506886, 0)
